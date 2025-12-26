@@ -4,6 +4,6 @@ services:
   app:
     build: .
     ports:
-      - "6528:6528"
+      - "6528:3000"
     environment:
       - NODE_ENV=production
