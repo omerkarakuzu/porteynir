@@ -1,38 +1,45 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [rememberMe, setRememberMe] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const { toast } = useToast()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
     // Mock login - gerçek uygulamada burada API çağrısı yapılır
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       toast({
         title: "Giriş başarılı!",
         description: `Hoş geldiniz, ${email}`,
-      })
-      // Gerçek uygulamada buradan yönlendirme yapılır
-      // router.push('/dashboard')
-    }, 1500)
-  }
+      });
+      router.push("/dashboard");
+    }, 1500);
+  };
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
@@ -48,8 +55,12 @@ export default function LoginPage() {
           {/* Form */}
           <div className="space-y-6">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tight">Hoş geldiniz</h1>
-              <p className="text-muted-foreground">Hesabınıza giriş yapın ve devam edin</p>
+              <h1 className="text-3xl font-bold tracking-tight">
+                Hoş geldiniz
+              </h1>
+              <p className="text-muted-foreground">
+                Hesabınıza giriş yapın ve devam edin
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +80,10 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Şifre</Label>
-                  <Link href="#" className="text-sm text-accent hover:underline">
+                  <Link
+                    href="#"
+                    className="text-sm text-accent hover:underline"
+                  >
                     Şifremi unuttum?
                   </Link>
                 </div>
@@ -88,7 +102,9 @@ export default function LoginPage() {
                 <Checkbox
                   id="remember"
                   checked={rememberMe}
-                  onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    setRememberMe(checked as boolean)
+                  }
                 />
                 <label
                   htmlFor="remember"
@@ -98,7 +114,11 @@ export default function LoginPage() {
                 </label>
               </div>
 
-              <Button type="submit" className="w-full h-11" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full h-11"
+                disabled={isLoading}
+              >
                 {isLoading ? "Giriş yapılıyor..." : "Giriş Yap"}
               </Button>
             </form>
@@ -108,12 +128,18 @@ export default function LoginPage() {
                 <span className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">veya</span>
+                <span className="bg-background px-2 text-muted-foreground">
+                  veya
+                </span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline" type="button" className="h-11 bg-transparent">
+              <Button
+                variant="outline"
+                type="button"
+                className="h-11 bg-transparent"
+              >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -134,8 +160,16 @@ export default function LoginPage() {
                 </svg>
                 Google
               </Button>
-              <Button variant="outline" type="button" className="h-11 bg-transparent">
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <Button
+                variant="outline"
+                type="button"
+                className="h-11 bg-transparent"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
                 </svg>
                 GitHub
@@ -144,7 +178,10 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-muted-foreground">
               Hesabınız yok mu?{" "}
-              <Link href="#" className="text-accent hover:underline font-medium">
+              <Link
+                href="#"
+                className="text-accent hover:underline font-medium"
+              >
                 Kayıt olun
               </Link>
             </p>
@@ -158,15 +195,20 @@ export default function LoginPage() {
           <div className="inline-block px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium">
             Yeni Özellik
           </div>
-          <h2 className="text-4xl font-bold text-balance">Web geliştirmeyi yeniden düşünüyoruz</h2>
+          <h2 className="text-4xl font-bold text-balance">
+            Web geliştirmeyi yeniden düşünüyoruz
+          </h2>
           <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-            Ekibiniz için güçlendirilmiş araçlarla düşünce hızında uygulama oluşturun. Güvenlik ve performans yerleşik.
+            Ekibiniz için güçlendirilmiş araçlarla düşünce hızında uygulama
+            oluşturun. Güvenlik ve performans yerleşik.
           </p>
           <div className="pt-4">
             <Card className="border-accent/20">
               <CardHeader>
                 <CardTitle className="text-lg">Hızlı Başlangıç</CardTitle>
-                <CardDescription>Dakikalar içinde ilk projenizi oluşturun</CardDescription>
+                <CardDescription>
+                  Dakikalar içinde ilk projenizi oluşturun
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -174,19 +216,25 @@ export default function LoginPage() {
                     <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold">
                       1
                     </div>
-                    <span className="text-muted-foreground">Hesap oluşturun</span>
+                    <span className="text-muted-foreground">
+                      Hesap oluşturun
+                    </span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold">
                       2
                     </div>
-                    <span className="text-muted-foreground">İlk projenizi başlatın</span>
+                    <span className="text-muted-foreground">
+                      İlk projenizi başlatın
+                    </span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold">
                       3
                     </div>
-                    <span className="text-muted-foreground">Production'a dağıtın</span>
+                    <span className="text-muted-foreground">
+                      Production'a dağıtın
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -198,5 +246,5 @@ export default function LoginPage() {
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
       </div>
     </div>
-  )
+  );
 }
