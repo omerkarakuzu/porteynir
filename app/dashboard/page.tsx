@@ -165,7 +165,10 @@ export default function DashboardPage() {
                   <p className="text-xs text-slate-500">Dashboard</p>
                 </div>
               </div>
-              <Badge variant="secondary" className="bg-slate-100 text-slate-700 border-slate-200">
+              <Badge
+                variant="secondary"
+                className="bg-slate-100 text-slate-700 border-slate-200"
+              >
                 {user.role}
               </Badge>
             </div>
@@ -354,7 +357,9 @@ export default function DashboardPage() {
                 <Target className="w-5 h-5 text-slate-600" />
                 Aktif Projeler
               </CardTitle>
-              <CardDescription className="text-slate-600">Yürütülmekte olan projeleriniz</CardDescription>
+              <CardDescription className="text-slate-600">
+                Yürütülmekte olan projeleriniz
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {mockProjects.map((project) => (
