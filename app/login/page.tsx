@@ -196,7 +196,7 @@ export default function LoginPage() {
             Yeni Özellik
           </div>
           <h2 className="text-4xl font-bold text-balance">
-            Web geliştirmeyi yeniden düşünüyoruz
+            Web geliştirmeyi yeniden düşünüyoruz. Ömer Karakuzu
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
             Ekibiniz için güçlendirilmiş araçlarla düşünce hızında uygulama
